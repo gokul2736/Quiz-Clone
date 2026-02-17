@@ -20,7 +20,7 @@ It parses the incoming HTML strings using the DOMParser API, extracts specific q
  
 JavaScript  
 ```
-javascript:(async()=>{console.log("%c🚀 Scraping...", "color:cyan;font-weight:bold;");const n=document.querySelectorAll('.qnbutton').length,b=window.location.href.split('&page=')[0];let o="";for(let i=0;i<n;i++){try{const r=await fetch(`${b}&page=${i}`),h=await r.text(),d=new DOMParser().parseFromString(h,'text/html'),q=d.querySelector('.que');if(q){const t=q.querySelector('.qtext').innerText.trim(),s=Array.from(q.querySelectorAll('.flex-fill.ml-1')).map(a=>a.innerText.trim());o+=`Q${i+1}: ${t}\n${s.map((x,j)=>`  ${String.fromCharCode(97+j)}) ${x}`).join('\n')}\n\n`}}catch(e){}await new Promise(r=>setTimeout(r,200))}console.clear();console.log(o);alert("Scrape Complete! Check Console (F12)");})();
+javascript:(async()=>{const n=document.querySelectorAll('.qnbutton'),t=n.length,b=window.location.href.split('&page=')[0];if(!t)return;console.clear();for(let i=0;i<t;i++){try{const r=await fetch(`${b}&page=${i}`),h=await r.text(),d=new DOMParser().parseFromString(h,'text/html'),q=d.querySelector('.que');if(q){const x=q.querySelector('.qtext').innerText.trim(),s=Array.from(q.querySelectorAll('.flex-fill.ml-1')).map(a=>a.innerText.trim());console.log(`Q${i+1}: ${x}\n${s.map((v,j)=>`  ${String.fromCharCode(97+j)}) ${v}`).join('\n')}\n\n`)}}catch(e){}await new Promise(r=>setTimeout(r,150))}})();
 ```
 
 ### Method 2: Developer Console
